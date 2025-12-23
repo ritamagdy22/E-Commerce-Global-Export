@@ -5,8 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const popup = document.getElementById("popup");
   const popupMessage = document.getElementById("popupMessage");
   const closePopup = document.getElementById("closePopup");
+  const cartCountEl = document.getElementById("cartCount");
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  function updateCartCount() {
+    if (cartCountEl) {
+      cartCountEl.textContent = cart.length;
+    }
+  }
 
   function renderCart() {
     cartItemsDiv.innerHTML = "";
@@ -15,19 +22,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cart.length === 0) {
       cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
       totalPriceEl.textContent = "0.00";
+      updateCartCount();
       return;
     }
 
     cart.forEach((item, index) => {
-      total += item.price;
+      total += Number(item.price);
 
       const div = document.createElement("div");
       div.className = "cart-item";
       div.innerHTML = `
-        <img src="${item.image}">
+        <img src="${item.image}" alt="${item.name}">
         <div>
           <h3>${item.name}</h3>
-          <p>$${item.price.toFixed(2)}</p>
+          <p>$${Number(item.price).toFixed(2)}</p>
           <button class="remove-btn" data-index="${index}">Remove</button>
         </div>
       `;
@@ -35,11 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     totalPriceEl.textContent = total.toFixed(2);
+    updateCartCount();
 
-    const removeButtons = document.querySelectorAll(".remove-btn");
-    removeButtons.forEach(btn => {
+    document.querySelectorAll(".remove-btn").forEach(btn => {
       btn.addEventListener("click", () => {
-        const idx = btn.getAttribute("data-index");
+        const idx = btn.dataset.index;
         cart.splice(idx, 1);
         localStorage.setItem("cart", JSON.stringify(cart));
         renderCart();
@@ -49,24 +57,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderCart();
 
- checkoutBtn.addEventListener("click", () => {
+  checkoutBtn.addEventListener("click", () => {
     if (cart.length === 0) {
-        popupMessage.textContent = "Your cart is empty!";
-        popup.style.display = "flex";
-    } else {
-        popupMessage.textContent = "You order has been placed successfully!";
-        localStorage.removeItem("cart");
-        cart = [];
-        renderCart();
-        popup.style.display = "flex";
-
-        // Redirect to payment page after 2 seconds
-        setTimeout(() => {
-            window.location.href = "../html/payment.html";
-        }, 2000); // 2000ms = 2 seconds
+      popupMessage.textContent = "Your cart is empty!";
+      popup.style.display = "flex";
+      return;
     }
-});
 
+    popupMessage.textContent = "Your order has been placed successfully!";
+    localStorage.removeItem("cart");
+    cart = [];
+    renderCart();
+    popup.style.display = "flex";
+
+    setTimeout(() => {
+      window.location.href = "../html/payment.html";
+    }, 2000);
+  });
 
   closePopup.addEventListener("click", () => {
     popup.style.display = "none";

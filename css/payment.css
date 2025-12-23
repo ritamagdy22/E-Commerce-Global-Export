@@ -74,6 +74,42 @@ nav ul li a:hover,
 nav ul li a.active {
   color: var(--secondary);
 }
+.cart-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.cart-icon {
+  position: relative;
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.cart-icon:hover {
+  transform: scale(1.1);
+}
+
+.cart-icon i {
+  color: #000;
+}
+
+/* Cart count badge */
+.cart-icon span {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #000;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* PAYMENT SECTION */
 .payment-section {

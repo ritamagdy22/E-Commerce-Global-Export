@@ -79,29 +79,42 @@
             color: var(--secondary);
         }
 
-        .auth-buttons button {
-            padding: 8px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
+      .cart-link {
+  text-decoration: none;
+  color: inherit;
+}
 
-        .login-btn {
-            background: transparent;
-            color: var(--primary);
-            margin-right: 10px;
-        }
+.cart-icon {
+  position: relative;
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
 
-        .signup-btn {
-            background: var(--primary);
-            color: white;
-        }
+.cart-icon:hover {
+  transform: scale(1.1);
+}
 
-        .auth-buttons button:hover {
-            opacity: 0.9;
-        }
+.cart-icon i {
+  color: #000;
+}
+
+/* Cart count badge */
+.cart-icon span {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #000;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
         /* Hero Section */
         .hero {

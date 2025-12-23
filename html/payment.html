@@ -23,11 +23,30 @@
             <li><a href="index.html#products">Products</a></li>
             <li><a class="active" href="../html/payment.html">Payment</a></li>
             <li><a href="index.html#contact">Contact</a></li>
+             <a href="../html/cart.html" class="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cartCount">0</span>
+      </a>
           </ul>
+           <!-- CART ICON -->
+     
         </nav>
       </div>
     </div>
   </header>
+  
+<section class="cart-section">
+  <div class="container">
+
+    <div id="cartItems"></div>
+    
+    <div class="cart-summary">
+      <h2>Total: $<span id="totalPrice">0.00</span></h2>
+      <button id="checkoutBtn">Cash Out</button>
+    </div>
+
+  </div>
+</section>
 
   <!-- Payment Section -->
   <section class="payment-section">
